@@ -18,7 +18,7 @@ const Employees = () => {
   const employeesMap = useSelector(selectEmployeesMap);
 
   return (
-    <div id="main-content" style={{marginTop : '23px'}}>
+    <div id="main-content">
       <div className="table-responsive">
         <table className="table table-striped table-bordered" id="performance_table">
           <thead>

@@ -21,7 +21,7 @@ const JobDescription = () => {
   const jdMap = useSelector(selectJDMap);
 
   return (
-    <div id="main-content" style={{marginTop : '63px'}}>
+    <div id="main-content">
       <div className="table-responsive">
         <table className="table table-striped table-bordered" id="performance_table">
           <thead>
