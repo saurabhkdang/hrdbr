@@ -18,32 +18,30 @@ const HolidaysList = () => {
   const holidaysMap = useSelector(selectHolidaysMap);
 
   return (
-    <div id="main-content">
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered" id="performance_table">
-          <thead>
-          <tr>
-            <th>Date</th>
-            <th>Holiday</th>
-            <th>Us/Indian Holiday</th>
-            <th>Action(s)</th>
+    <div className="table-responsive">
+      <table className="table table-striped table-bordered" id="performance_table">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Holiday</th>
+          <th>Us/Indian Holiday</th>
+          <th>Action(s)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {holidaysMap.data === undefined?
+        <tr><td colSpan={9}>Loading</td></tr>:
+        holidaysMap.data.data.map((holiday) => {
+          return <tr key={holiday.id}>
+            <td >{holiday.dated}</td>
+            <td >{holiday.attendence}</td>
+            <td >{holiday.reason}</td>
+            <td></td>
           </tr>
-          </thead>
-          <tbody>
-          {holidaysMap.data === undefined?
-          <tr><td colSpan={9}>Loading</td></tr>:
-          holidaysMap.data.data.map((holiday) => {
-            return <tr key={holiday.id}>
-              <td >{holiday.dated}</td>
-              <td >{holiday.attendence}</td>
-              <td >{holiday.reason}</td>
-              <td></td>
-            </tr>
-          })
-          }
-          </tbody>
-        </table>
-      </div>
+        })
+        }
+        </tbody>
+      </table>
     </div>
   )
 }

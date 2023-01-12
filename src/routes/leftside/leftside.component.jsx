@@ -16,7 +16,7 @@ const LeftNav = () => {
                     <li className="@yield('menu_performance') @yield('menu_training') @yield('menu_attendance') @yield('menu_job') @yield('menu_holiday')">
                         <a href="#uiElements" className="has-arrow" aria-expanded="false"><i className="fa fa-building-o"></i> <span>Company</span></a>
                         <ul>
-                            <li className="menu_performance"><Link to="/"><i className="lnr lnr-star"></i> <span>Monthly Rating</span></Link></li>
+                            <li className="menu_performance"><Link to="/performance"><i className="lnr lnr-star"></i> <span>Monthly Rating</span></Link></li>
                             <li className="send_performance"><Link to="/"><i className="fa fa-file-word-o"></i> <span>Send Monthly Rating</span></Link></li>
                             <li className="menu_training"><Link to="/"><i className="fa fa-calendar"></i> <span>Events</span></Link></li>
                             <li className="menu_attendance"><Link to="/"><i className="lnr lnr-hourglass"></i> <span>Attendance</span></Link></li>
@@ -24,7 +24,7 @@ const LeftNav = () => {
                             <li className="menu_holiday"><Link to="/holiday"><i className="fa fa-file-word-o"></i> <span>Holidays</span></Link></li>
                         </ul>
                     </li>                    
-                    <li className="menu_assign_roles"><Link to="/"><i className="lnr lnr-users"></i> <span>Assign Roles</span></Link></li>
+                    <li className="menu_assign_roles"><Link to="/assign-roles"><i className="lnr lnr-users"></i> <span>Assign Roles</span></Link></li>
                     <li><a href="mailto:support@interlynxsystems.com"><i className="lnr lnr-question-circle"></i> <span>Support</span></a></li>
                 </ul>
             </nav>

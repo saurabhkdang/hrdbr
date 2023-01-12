@@ -3,6 +3,8 @@ import Navigation from './routes/navigation/navigation.component';
 import Employees from './routes/employees/employees.component';
 import JobDescription from './routes/jobdescriptions/jobdescription.component';
 import HolidaysList from './routes/holiday/holiday.component';
+import AssignRoles from './routes/assign-roles/assign-roles.component';
+import MonthlyRatings from './routes/monthly-ratings/monthly-ratings.component';
 import './App.css';
 
 function App() {
@@ -13,6 +15,10 @@ function App() {
         <Route index element={<Employees/>} />
         <Route path='job' element={<JobDescription/>} />
         <Route path='holiday' element={<HolidaysList/>} />
+        <Route path='assign-roles' element={<AssignRoles/>}>
+          <Route path=":role" element={<AssignRoles/>}></Route>
+        </Route>
+        <Route path='performance' element={<MonthlyRatings/>} />
       </Route>
     </Routes>
     </>

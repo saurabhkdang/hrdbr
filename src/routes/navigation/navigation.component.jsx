@@ -19,7 +19,11 @@ const Navigation = () => {
         </div>
       </div>
       <LeftNav/>
-      <Outlet/>
+      <div id="main-content">
+        <div className='container-fluid'>
+          <Outlet/>
+        </div>
+      </div>
     </>
   )
 }

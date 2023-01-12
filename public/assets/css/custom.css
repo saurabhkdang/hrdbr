@@ -1,0 +1,120 @@
+.bcrumbs{
+	font: 12px;
+}
+.section-heading{
+	margin-bottom:10px !important;
+}
+.custom_breadcrumb{
+	margin-left: 64px;
+	display: inline-block;
+}
+.nav_left,.nav_right{
+	padding: 10px;
+	font-size: 20px;
+	cursor: pointer;
+	font-weight: bolder;
+
+}
+.monthly_view {
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid gray;
+    padding: 10px;
+    font-size: 14px;
+}
+
+ol.breadcrumb{
+	margin-bottom:0px !important;
+	line-height: 35px;
+	
+	padding:8px 50px !important;
+}
+
+.user-account{
+	margin:14px auto 13px auto !important;
+}
+.calender {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 35px;
+    border: 1px solid #f5f5f5;
+    border-collapse: collapse;
+}
+h3.custom_heading{
+	margin:0px;
+	margin-bottom: 15px;
+	padding: 5px 0px;
+	color:#08a4b5;
+	float: left;
+}
+.style_half_day{
+	background-color: pink;
+	color: white;
+}
+.style_short_day{
+	background-color: orange;
+	color: white;
+}
+.style_workfromhome{
+	background-color: yellow;
+	color: white;
+}
+
+.style_yellow{
+	background-color: #fbcf51;
+	color: white;
+}
+
+.style_normal{
+	background-color: #eee;
+	color:black !important;
+}
+.style_red,.style_absent{
+	background-color: #ea4335;
+	color: white;
+}
+.style_green,.style_present{
+	background-color: #34a853;
+	color: white;
+}
+.style_satsun{
+	background-color: gray !important;
+	color: white;
+}
+.style_holiday{
+	background-color: orange;
+}
+.style_white{
+	background-color: white !important;
+	color:white;
+}
+
+.fillparent {
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+}
+.full_calender_date div{
+	font-size: 15px;
+	padding: 4px
+}
+.full_calender_date {
+
+    width: 130px;
+    height: 130px;
+    display: block;
+    background: #eff2ff;
+    margin: 3px;
+    border: 1px solid black;    
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
