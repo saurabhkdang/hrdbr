@@ -4,7 +4,10 @@ import { useLocation, Link } from 'react-router-dom';
 const Breadcrumb = ({items}) => {  
 
     const location = useLocation();
-    const index = location.pathname;
+    let index = location.pathname;
+    if(index.search('assign-roles')>-1){
+        index = '/assign-roles';
+    }
 
     return (
         <div className="custom_breadcrumb">
