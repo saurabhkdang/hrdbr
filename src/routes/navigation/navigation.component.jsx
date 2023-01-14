@@ -6,8 +6,46 @@ import LeftNav from '../leftside/leftside.component';
 import { signOutStart } from '../../store/login/login.action';
 import { selectToken, selectUser } from '../../store/login/login.selector';
 import SearchBar from '../../components/search/search.component';
+import Breadcrumb from '../../components/breadcrumb/breadcrumb.component';
 
 const Navigation = () => {
+
+  const items = [
+    {
+      '/' : [
+        {label : 'Home'},
+        {label : 'Employee Details'}
+      ],
+      '/performance' : [
+        {'to' : '/', label : 'Home'},
+        {'label' : 'Monthly Ratings'},
+      ],
+      '/send_monthly_rating' : [
+        {'to' : '/', label : 'Home'},
+        {'label' : 'Send Monthly Ratings'},
+      ],
+      '/training' : [
+        {'to' : '/', label : 'Home'},
+        {'label' : 'Events'},
+      ],
+      '/update_attendance' : [
+        {'to' : '/', label : 'Home'},
+        {'label' : 'Attendence'},
+      ],
+      '/job' : [
+        {'to' : '/', label : 'Home'},
+        { 'label' : 'Job Description'},
+      ],
+      '/holiday' : [
+        {'to' : '/', label : 'Home'},
+        {'label' : 'Holidays List'},
+      ],
+      '/assign-roles' : [
+        {'to' : '/', label : 'Home'},
+        {'label' : 'Assign Roles'},
+      ]
+    }
+  ]
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,6 +75,7 @@ const Navigation = () => {
 						  <img alt='' style={{"position": "relative","top":"-8px","maxWidth":"60%"}} src={logo} className="img-responsive logo" />
 					  </a>   
           </div>
+          <Breadcrumb items={items}/>
           <div className='navbar-right'>
             <SearchBar/>
             <div id="navbar-menu">
