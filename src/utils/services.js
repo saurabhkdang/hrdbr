@@ -3,7 +3,6 @@ const BASE_PATH = process.env.REACT_APP_SERVER_URL;
 
 const getAPIResponse = async (route, method = 'GET', postData={}) => {
     try {
-        console.log(postData);
         /* const requestOptions = {
             url: BASE_PATH+route,
         };
@@ -32,8 +31,21 @@ const getAPIResponse = async (route, method = 'GET', postData={}) => {
             body: JSON.stringify(postData)
         };
 
+        const getRequestBody = '';
+        let paramString = '';
+
+        if(method === 'GET'){
+            const keys = Object.keys(postData);
+            const params = [];
+            keys.forEach((key, index) => {
+                //console.log(`${key}: ${postData[key]}`);
+                params.push(`${key}=${postData[key]}`);
+            });
+            paramString = params.join('&');
+        }
+
         let response = await fetch(
-            BASE_PATH+route+'?api_token=dHU0dmJXeGtJU1dGWWY5dG1GazZhWWNjY00wN2tMbnBqY1ZjUFY2dw==',
+            BASE_PATH+route+'?'+(paramString!=''?paramString+'&':"")+'api_token=dHU0dmJXeGtJU1dGWWY5dG1GazZhWWNjY00wN2tMbnBqY1ZjUFY2dw==',
             (method==="POST"?requestOptions:null)
         );
         let responseJson = await response.json();
@@ -51,8 +63,8 @@ export const validateOTP = async (email, otp) => {
     return getAPIResponse('validate_otp', 'POST', {email, otp})
 }
 
-export const getEmployees = async () => {
-    return getAPIResponse('listuser');
+export const getEmployees = async (searchObj) => {
+    return getAPIResponse('listuser', 'GET', searchObj);
 }
 
 export const getJobDescriptions = async () => {

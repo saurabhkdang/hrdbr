@@ -4,7 +4,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import LeftNav from '../leftside/leftside.component';
 import { signOutStart } from '../../store/login/login.action';
-import { selectToken } from '../../store/login/login.selector';
+import { selectToken, selectUser } from '../../store/login/login.selector';
+import SearchBar from '../../components/search/search.component';
 
 const Navigation = () => {
 
@@ -13,10 +14,10 @@ const Navigation = () => {
 
   const logoutHandler = () => {
     dispatch(signOutStart());
-    //navigate("/login");
   }
 
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     if(token == null)
@@ -37,6 +38,7 @@ const Navigation = () => {
 					  </a>   
           </div>
           <div className='navbar-right'>
+            <SearchBar/>
             <div id="navbar-menu">
               <ul className="nav navbar-nav">
                 <li className="dropdown"></li>
@@ -66,7 +68,7 @@ const Navigation = () => {
                 <li className="dropdown">
                   <span className="dropdown-toggle icon-menu" data-toggle="dropdown" onClick={logoutHandler}>
                     <i className="lnr lnr-user"></i> &nbsp;
-                    <strong>Welcome, </strong>Saurabh Dang
+                    <strong>Welcome, {user?user.name:""}</strong>
                   </span>
                   <ul className="dropdown-menu user-menu menu-icon">
                     <li className="menu-heading">Welcome, Saurabh Dang</li>

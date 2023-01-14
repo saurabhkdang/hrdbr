@@ -3,7 +3,8 @@ import { EMPLOYEES_ACTION_TYPES } from "./employee.types";
 export const EMPLOYEES_INITIAL_STATE = {
     employees: [],
     isLoading: false,
-    error: null
+    error: null,
+    searchObj: {}
 }
 
 export const employeesReduer = (state = EMPLOYEES_INITIAL_STATE, action={}) => {
@@ -11,9 +12,8 @@ export const employeesReduer = (state = EMPLOYEES_INITIAL_STATE, action={}) => {
     
     switch(type) {
         case EMPLOYEES_ACTION_TYPES.FETCH_EMPLOYEES_START:
-            return { ...state, isLoading: true }
+            return { ...state, searchObj:payload, isLoading: true }
         case EMPLOYEES_ACTION_TYPES.FETCH_EMPLOYEES_SUCCESS:
-            console.log(payload);
             return { ...state, employees: payload, isLoading:false }
         case EMPLOYEES_ACTION_TYPES.FETCH_EMPLOYEES_FAILED:
             return { ...state, error: payload, isLoading: false }

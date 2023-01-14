@@ -10,7 +10,7 @@ const Employees = () => {
 
   useEffect(() => {
     const getEmployeesMap = async () => {
-      dispatch(fetchEmployeesStart());
+      dispatch(fetchEmployeesStart({search:'',search_type:''}));
     }
     getEmployeesMap();
   },[]);

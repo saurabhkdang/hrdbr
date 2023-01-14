@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../assets/logo.png';
 import left from '../../assets/left.png';
 import { signInStart, submitOTP } from '../../store/login/login.action';
-import { selectToken } from '../../store/login/login.selector';
+import { selectOtp, selectToken } from '../../store/login/login.selector';
 import { useNavigate } from 'react-router-dom';
 
 const defaultFormFields = {
@@ -35,7 +35,8 @@ const Login = () => {
     }
 
     const token = useSelector(selectToken);
-    console.log(token);
+    const otpRec = useSelector(selectOtp);
+    console.log(otpRec);
     
     const handleEmailSubmit = async (event) => {
         event.preventDefault();
@@ -69,7 +70,7 @@ const Login = () => {
                             <form method="POST">
                                 <div>
                                     <br/>
-                                    <div id="div_username">
+                                    <div id="div_username" style={{'display': (otpRec===null || otpRec===undefined?'block':'none') }}>
                                         <label>
                                             <b>Email Id</b>
                                             <span style={{"color":"red"}}>*</span>
@@ -78,15 +79,15 @@ const Login = () => {
                                             <input type="text" className="form-control" name="email" id="signin-email" placeholder="Email" onChange={handleChange} value={email}/>
                                         </div>
                                         <br/>
+                                        <button id="btn_Login" type="submit" onClick={handleEmailSubmit}>Send OTP</button>
                                     </div>
-                                    <div id="otp_box">
+                                    <div id="otp_box" style={{'display': (otpRec!==null && otpRec!==undefined?'block':'none') }}>
                                         <label htmlFor="otp"><b>OTP</b><span style={{"color":"red"}}>*</span></label>
                                         <div>
                                             <input type="password" name="otp" id="otp" onChange={handleChange} value={otp}/>
                                         </div>
+                                        <button id="btn_Login" type="submit" onClick={loginMe}>Login</button>
                                     </div>
-                                    <button id="btn_Login" type="submit" onClick={loginMe}>Login</button>
-                                    <button id="btn_Login" type="submit" onClick={handleEmailSubmit}>Send OTP</button>
                                 </div>
                             </form>
                         </div>

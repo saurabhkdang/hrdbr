@@ -3,9 +3,9 @@ import { getEmployees } from "../../utils/services";
 import { fetchEmployeesSuccess, fetchEmployeesFailed  } from "./employee.action";
 import { EMPLOYEES_ACTION_TYPES } from "./employee.types";
 
-export function* fetchEmployeesSync(){
+export function* fetchEmployeesSync({payload: searchObj}){
     try {
-        const employeesArray = yield call(getEmployees);
+        const employeesArray = yield call(getEmployees, searchObj);
         yield put(fetchEmployeesSuccess(employeesArray));
     } catch (error) {
         yield put(fetchEmployeesFailed(error));

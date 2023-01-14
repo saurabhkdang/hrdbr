@@ -1,6 +1,6 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { getOTP, validateOTP } from "../../utils/services";
-import { submitOTP, signInSuccess, signInFailed } from "./login.action";
+import { submitOTP, signInSuccess, signInFailed, gotOtp } from "./login.action";
 import { LOGIN_ACTION_TYPES } from "./login.types";
 
 export function* onValidateEmail({payload:email}){
@@ -10,21 +10,21 @@ export function* onValidateEmail({payload:email}){
             //put(signInFailed(loginResponse.email));
             alert(loginResponse.email);
         }
-        alert(loginResponse.otp);
+        //alert(loginResponse.otp);
+        yield put(gotOtp(loginResponse.otp));
     } catch (error) {
         yield put(signInFailed(error));
     }
 }
 
 export function* onValidateOtp({payload: {email,otp} }){
-    console.log(email, otp);
     try {
         const otpResponse = yield call(validateOTP, email, otp);
         if(otpResponse.email || otpResponse.error || otpResponse.otp){
             //put(signInFailed(loginResponse.email));
             alert('Some Error');
         }
-        yield put(signInSuccess(otpResponse.api_token));
+        yield put(signInSuccess(otpResponse.api_token,otpResponse.user));
     } catch (error) {
         yield put(signInFailed(error));
     }
