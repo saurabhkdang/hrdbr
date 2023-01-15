@@ -81,17 +81,17 @@ const Navigation = () => {
             <div id='navbar-menu'>
               <ul className='nav navbar-nav'>
                 <li className="dropdown">
-                  <a href="#" className="dropdown-toggle icon-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="lnr lnr-user"></i>&nbsp;<strong>Welcome, {user?user.name:""}</strong><span className="caret"></span></a>
+                  <a href="#" className="dropdown-toggle icon-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="lnr lnr-user"></i>&nbsp;Welcome, {user?user.name:""}<span className="caret"></span></a>
                   <ul className="dropdown-menu user-menu menu-icon">
-                    <li class="menu-heading">Welcome, {user?user.name:""}</li>
+                    <li className="menu-heading">Welcome, {user?user.name:""}</li>
                     <li>
                       <a to={'/'}>
-                        <i class="fa fa-fw fa-user"></i>
+                        <i className="fa fa-fw fa-user"></i>
                         <span>My Profile</span>
                       </a>
                     </li>
-                    <li class="menu-button">
-                      <a onClick={logoutHandler} class="btn btn-primary"><i class="fa fa-rocket"></i> Logout</a>
+                    <li className="menu-button">
+                      <a onClick={logoutHandler} className="btn btn-primary"><i className="fa fa-rocket"></i> Logout</a>
                     </li>
                   </ul>
                 </li>
