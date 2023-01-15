@@ -1,8 +1,9 @@
 import {React, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAssignRolesStart } from '../../store/assign-roles/assign-roles.action';
-import { selectAssignRolesMap } from '../../store/assign-roles/assign-roles.selector';
+import { selectAssignRolesMap, selectAssignRolesIsLoading } from '../../store/assign-roles/assign-roles.selector';
 import {useParams, useNavigate} from 'react-router-dom';
+import Spinner from '../../components/spinner/spinner.component';
 
 const AssignRoles = () => {
 
@@ -23,6 +24,7 @@ const AssignRoles = () => {
 
   
   const assignRolesMap = useSelector(selectAssignRolesMap);
+  const isLoading = useSelector(selectAssignRolesIsLoading);
   
   const permissionChangeHandler = (event) => navigate(event.target.value);
 
@@ -54,6 +56,7 @@ const AssignRoles = () => {
       <div className="clearfix"></div>
       <div className='col-md-12'>
         <div className="table-responsive">
+          {isLoading?<Spinner/>:
           <table className="table table-striped table-bordered">
             <thead>
               <tr>
@@ -63,7 +66,7 @@ const AssignRoles = () => {
             </thead>
             <tbody>
             {assignRolesMap.actions === undefined?
-                <tr><td colSpan={9}>Loading</td></tr>:
+                <tr><td colSpan={9}><Spinner/></td></tr>:
                 assignRolesMap.actions.map((holiday, index) => {
                 return <tr key={holiday.id}>
                   <td>{holiday.name}</td>
@@ -84,6 +87,7 @@ const AssignRoles = () => {
               }
             </tbody>
           </table>
+          }
         </div>
       </div>
     </div>

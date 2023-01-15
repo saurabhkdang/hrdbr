@@ -1,8 +1,8 @@
 import {React, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchJDStart } from '../../store/jobdescriptions/jobdescription.action';
-import { selectJDMap } from '../../store/jobdescriptions/jobdescription.selector';
-
+import { selectJDMap, selectJDIsLoading } from '../../store/jobdescriptions/jobdescription.selector';
+import Spinner from '../../components/spinner/spinner.component';
 
 const JobDescription = () => {
 
@@ -19,9 +19,11 @@ const JobDescription = () => {
   },[])
 
   const jdMap = useSelector(selectJDMap);
+  const isLoading = useSelector(selectJDIsLoading);
 
   return (
     <div className="table-responsive">
+      {isLoading?<Spinner/>:
       <table className="table table-striped table-bordered" id="performance_table">
         <thead>
         <tr>
@@ -34,7 +36,7 @@ const JobDescription = () => {
         </thead>
         <tbody>
         {jdMap.data === undefined?
-        <tr><td colSpan={9}>Loading</td></tr>:
+        <tr><td colSpan={9}><Spinner/></td></tr>:
         jdMap.data.data.map((jd) => {
           return <tr key={jd.id}>
             <td >{jd.team_name}</td>
@@ -47,6 +49,7 @@ const JobDescription = () => {
         }
         </tbody>
       </table>
+      }
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import {React, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import LeftNav from '../leftside/leftside.component';
 import { signOutStart } from '../../store/login/login.action';
@@ -71,50 +71,27 @@ const Navigation = () => {
             {/* <button type="button" className="btn-toggle-offcanvas"><i className="lnr lnr-menu"></i></button> */}
           </div>
           <div className="navbar-brand">
-            <a href="https://hrdb.interlynxsystems.com/public">
+            <Link to="/">
 						  <img alt='' style={{"position": "relative","top":"-8px","maxWidth":"60%"}} src={logo} className="img-responsive logo" />
-					  </a>   
+					  </Link>   
           </div>
           <Breadcrumb items={items}/>
-          <div className='navbar-right'>
+          <div className='nav navbar-right'>
             <SearchBar/>
-            <div id="navbar-menu">
-              <ul className="nav navbar-nav">
-                <li className="dropdown"></li>
+            <div id='navbar-menu'>
+              <ul className='nav navbar-nav'>
                 <li className="dropdown">
-                  <a href="#" className="dropdown-toggle icon-menu" data-toggle="dropdown">
-                    <i className="lnr lnr-alarm"></i>
-                    <span className="notification-dot"></span>
-                  </a>
-                  <ul className="dropdown-menu notifications">
-                    <li className="header"><strong>You have 7 new notifications</strong></li>
+                  <a href="#" className="dropdown-toggle icon-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="lnr lnr-user"></i>&nbsp;<strong>Welcome, {user?user.name:""}</strong><span className="caret"></span></a>
+                  <ul className="dropdown-menu user-menu menu-icon">
+                    <li class="menu-heading">Welcome, {user?user.name:""}</li>
                     <li>
-                      <a href="#">
-                        <div className="media">
-                          <div className="media-left">
-                            <i className="fa fa-fw fa-flag-checkered text-muted"></i>
-                          </div>
-                          <div className="media-body">
-                            <p className="text">Your campaign <strong>Holiday Sale</strong> is starting to engage potential customers.</p>
-                            <span className="timestamp">24 minutes ago</span>
-                          </div>
-                        </div>
+                      <a to={'/'}>
+                        <i class="fa fa-fw fa-user"></i>
+                        <span>My Profile</span>
                       </a>
                     </li>
-                    <li className="footer"><a href="#" className="more">See all notifications</a></li>
-                  </ul>
-                </li>
-                <li className="dropdown">
-                  <span className="dropdown-toggle icon-menu" data-toggle="dropdown" onClick={logoutHandler}>
-                    <i className="lnr lnr-user"></i> &nbsp;
-                    <strong>Welcome, {user?user.name:""}</strong>
-                  </span>
-                  <ul className="dropdown-menu user-menu menu-icon">
-                    <li className="menu-heading">Welcome, Saurabh Dang</li>
-                    <li><a href="#"><i className="fa fa-fw fa-user"></i> <span>My Profile</span></a></li>
-                    <li><a href="#"><i className="fa fa-fw fa-key"></i> <span>Change Password</span></a></li>	
-                    <li className="menu-button">
-                      <a href="https://localhost/hrdb/public/me/logout" className="btn btn-primary"><i className="fa fa-rocket"></i> Logout</a>
+                    <li class="menu-button">
+                      <a onClick={logoutHandler} class="btn btn-primary"><i class="fa fa-rocket"></i> Logout</a>
                     </li>
                   </ul>
                 </li>

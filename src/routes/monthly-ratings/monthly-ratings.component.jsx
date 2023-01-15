@@ -1,7 +1,8 @@
 import {React, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMonthlyRatingsStart } from '../../store/monthly-ratings/monthly-ratings.action';
-import { selectMonthlyRatingsMap } from '../../store/monthly-ratings/monthly-ratings.selector';
+import { selectMonthlyRatingsMap, selectMonthlyRatingsIsLoading } from '../../store/monthly-ratings/monthly-ratings.selector';
+import Spinner from '../../components/spinner/spinner.component';
 
 const MonthlyRatings = () => {
 
@@ -16,7 +17,7 @@ const MonthlyRatings = () => {
     },[])
 
     const monthlyRatingsMap = useSelector(selectMonthlyRatingsMap);
-    
+    const isLoading = useSelector(selectMonthlyRatingsIsLoading);
 
     return (
         <div className="row">
@@ -24,6 +25,7 @@ const MonthlyRatings = () => {
                 <h3 className="custom_heading hide">Monthly Performance</h3> 
             </div>
             <div className="col-md-12">
+                {isLoading?<Spinner/>:
                 <table className="table table-striped table-bordered" id="performance_table">
                     <thead>
                         <tr>
@@ -57,10 +59,11 @@ const MonthlyRatings = () => {
                                         })
                                     }
                                 </tr>
-                            }):null
+                            }):<tr><td colSpan={13}><Spinner/></td></tr>
                         }
                     </tbody>
                 </table>
+                }
             </div>
         </div>
     )

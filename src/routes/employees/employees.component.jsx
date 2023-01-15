@@ -1,12 +1,13 @@
-import {React, useEffect} from 'react'
+import {React, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEmployeesStart } from '../../store/employees/employee.action';
-import { selectEmployeesMap } from '../../store/employees/employee.selector';
-
+import { selectEmployeesMap, selectEmployeesIsLoading } from '../../store/employees/employee.selector';
+import Spinner from '../../components/spinner/spinner.component';
 
 const Employees = () => {
   
   const dispatch = useDispatch();
+  //const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getEmployeesMap = async () => {
@@ -16,9 +17,12 @@ const Employees = () => {
   },[]);
 
   const employeesMap = useSelector(selectEmployeesMap);
+  const isLoading = useSelector(selectEmployeesIsLoading);
 
   return (
     <div className="table-responsive">
+
+      {isLoading?<Spinner/>:
       <table className="table table-striped table-bordered" id="performance_table">
         <thead>
         <tr>
@@ -35,7 +39,7 @@ const Employees = () => {
         </thead>
         <tbody>
         {employeesMap.data === undefined?
-        <tr><td colSpan={9}>Loading</td></tr>:
+        <tr><td colSpan={9}><Spinner /></td></tr>:
         employeesMap.data.data.map((employee) => {
           return <tr key={employee.id}>
             <td >{employee.name}</td>
@@ -52,6 +56,7 @@ const Employees = () => {
         }
         </tbody>
       </table>
+      }
     </div>
   );
 }
