@@ -1,7 +1,11 @@
 import { LOGIN_ACTION_TYPES } from "./login.types";
 
+const token = localStorage.getItem('userToken')
+  ? localStorage.getItem('userToken')
+  : null
+
 export const LOGIN_INITIAL_STATE = {
-    token: null,
+    token,
     error: null,
     isLoading:false,
     user:null,
@@ -17,8 +21,10 @@ export const loginReducer = (state = LOGIN_INITIAL_STATE, action={}) => {
         case LOGIN_ACTION_TYPES.LOGIN_OTP:
             return {...state, otp: payload, isLoading:false}
         case LOGIN_ACTION_TYPES.LOGOUT_START:
+            localStorage.setItem('userToken', null);
             return {...state,token:null,user:null,otp:null}
         case LOGIN_ACTION_TYPES.LOGIN_IN_SUCCESS:
+            localStorage.setItem('userToken', payload.token);
             return {...state, token: payload.token, user: payload.user, isLoading:false}
         case LOGIN_ACTION_TYPES.LOGIN_IN_FAILED:
             return {...state, error: payload, isLoading:false}

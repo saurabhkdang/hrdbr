@@ -1,4 +1,5 @@
 import axios from "axios";
+const token = localStorage.getItem('userToken');
 const BASE_PATH = process.env.REACT_APP_SERVER_URL;
 
 const getAPIResponse = async (route, method = 'GET', postData={}) => {
@@ -45,7 +46,7 @@ const getAPIResponse = async (route, method = 'GET', postData={}) => {
         }
 
         let response = await fetch(
-            BASE_PATH+route+'?'+(paramString!=''?paramString+'&':"")+'api_token=dHU0dmJXeGtJU1dGWWY5dG1GazZhWWNjY00wN2tMbnBqY1ZjUFY2dw==',
+            BASE_PATH+route+'?'+(paramString!=''?paramString+'&':"")+'api_token='+token,
             (method==="POST"?requestOptions:null)
         );
         let responseJson = await response.json();

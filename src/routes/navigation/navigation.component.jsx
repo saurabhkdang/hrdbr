@@ -1,6 +1,6 @@
 import {React, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useNavigate, Link } from 'react-router-dom';
+import { Outlet, useNavigate, Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import LeftNav from '../leftside/leftside.component';
 import { signOutStart } from '../../store/login/login.action';
@@ -49,6 +49,7 @@ const Navigation = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const logoutHandler = () => {
     dispatch(signOutStart());
@@ -77,7 +78,8 @@ const Navigation = () => {
           </div>
           <Breadcrumb items={items}/>
           <div className='nav navbar-right'>
-            <SearchBar/>
+
+            {location.pathname === '/'?<SearchBar/>:""}
             <div id='navbar-menu'>
               <ul className='nav navbar-nav'>
                 <li className="dropdown">
