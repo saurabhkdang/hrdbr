@@ -7,3 +7,4 @@ export const submitOTP = (email, otp) => createAction(LOGIN_ACTION_TYPES.LOGIN_I
 export const signInSuccess = (token, user) => createAction(LOGIN_ACTION_TYPES.LOGIN_IN_SUCCESS, {token, user});
 export const signInFailed = (error) => createAction(LOGIN_ACTION_TYPES.LOGIN_IN_FAILED, error);
 export const signOutStart = () => createAction(LOGIN_ACTION_TYPES.LOGOUT_START);
+export const hideLoginError = () => createAction(LOGIN_ACTION_TYPES.LOGIN_ERROR_HIDE);

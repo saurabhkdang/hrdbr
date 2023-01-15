@@ -25,9 +25,11 @@ export const loginReducer = (state = LOGIN_INITIAL_STATE, action={}) => {
             return {...state,token:null,user:null,otp:null}
         case LOGIN_ACTION_TYPES.LOGIN_IN_SUCCESS:
             localStorage.setItem('userToken', payload.token);
-            return {...state, token: payload.token, user: payload.user, isLoading:false}
+            return {...state, token: payload.token, user: payload.user, isLoading:false, error:null}
         case LOGIN_ACTION_TYPES.LOGIN_IN_FAILED:
             return {...state, error: payload, isLoading:false}
+        case LOGIN_ACTION_TYPES.LOGIN_ERROR_HIDE:
+            return {...state, error:null, isLoading:false}
         default:
             return state;
     }

@@ -2,8 +2,8 @@ import {React, useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../assets/logo.png';
 import left from '../../assets/left.png';
-import { signInStart, submitOTP } from '../../store/login/login.action';
-import { selectOtp, selectToken } from '../../store/login/login.selector';
+import { signInStart, submitOTP, hideLoginError } from '../../store/login/login.action';
+import { selectOtp, selectToken, selectLoginError } from '../../store/login/login.selector';
 import { useNavigate } from 'react-router-dom';
 
 const defaultFormFields = {
@@ -26,16 +26,16 @@ const Login = () => {
 
     const loginMe = async (event) => {
         event.preventDefault();
-
         try {
             dispatch(submitOTP(email, otp))
         } catch (error) {
-            
+            console.log('Login Error : ',error);
         }
     }
 
     const token = useSelector(selectToken);
     const otpRec = useSelector(selectOtp);
+    const loginError = useSelector(selectLoginError);
     console.log(otpRec);
     
     const handleEmailSubmit = async (event) => {
@@ -45,8 +45,12 @@ const Login = () => {
         } catch (error) {
             console.log(error);
         }
-
     }
+
+    const hideError = () => {
+        dispatch(hideLoginError());
+    }
+
     useEffect(() => {
         if(token!=null)
         navigate("/");
@@ -66,6 +70,10 @@ const Login = () => {
                     <div className="logn-head">LOG IN</div>
                     <div className="logn-frm">
                         <br/>
+                        <div className="alert alert-danger alert-block" style={{ 'display':(loginError?'block':'none') }}>
+                            <button type="button" onClick={hideError} className="close">×</button>	
+                            <strong>{loginError?loginError:""}</strong>
+                        </div>
                         <div id="LoginBox">
                             <form method="POST">
                                 <div>

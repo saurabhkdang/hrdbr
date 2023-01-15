@@ -7,11 +7,10 @@ export function* onValidateEmail({payload:email}){
     try {
         const loginResponse = yield call(getOTP, email);
         if(loginResponse.email){
-            //put(signInFailed(loginResponse.email));
-            alert(loginResponse.email);
+            yield put(signInFailed(loginResponse.email));
+        }else{
+            yield put(gotOtp(loginResponse.otp));
         }
-        //alert(loginResponse.otp);
-        yield put(gotOtp(loginResponse.otp));
     } catch (error) {
         yield put(signInFailed(error));
     }
@@ -20,11 +19,11 @@ export function* onValidateEmail({payload:email}){
 export function* onValidateOtp({payload: {email,otp} }){
     try {
         const otpResponse = yield call(validateOTP, email, otp);
-        if(otpResponse.email || otpResponse.error || otpResponse.otp){
-            //put(signInFailed(loginResponse.email));
-            alert('Some Error');
+        if(otpResponse.error){
+            yield put(signInFailed(otpResponse.error));
+        }else{
+            yield put(signInSuccess(otpResponse.api_token,otpResponse.user));
         }
-        yield put(signInSuccess(otpResponse.api_token,otpResponse.user));
     } catch (error) {
         yield put(signInFailed(error));
     }

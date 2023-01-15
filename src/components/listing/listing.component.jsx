@@ -12,7 +12,7 @@ const Listing = (props) => {
             <tr>
                 {
                 Object.keys(config).map(function(key) {
-                    return <th>{config[key]}</th>
+                    return <th key={key}>{config[key]}</th>
                 })
                 }
             </tr>
@@ -24,7 +24,7 @@ const Listing = (props) => {
             return <tr key={rec.id}>
                 {
                     Object.keys(config).map(function(key){
-                        return <td>{rec[key]}</td>
+                        return <td key={key}>{rec[key]}</td>
                     })
                 }
             </tr>
