@@ -2,7 +2,7 @@ import {React, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHolidaysStart } from '../../store/holiday/holiday.action';
 import { selectHolidaysMap, selectHolidaysIsLoading } from '../../store/holiday/holiday.selector';
-import Spinner from '../../components/spinner/spinner.component';
+import Listing from '../../components/listing/listing.component';
 
 const HolidaysList = () => {
 
@@ -18,35 +18,10 @@ const HolidaysList = () => {
 
   const holidaysMap = useSelector(selectHolidaysMap);
   const isLoading = useSelector(selectHolidaysIsLoading);
+  const config = {'dated': 'Date', 'attendence': 'Holiday','reason': 'Us/Indian Holiday'};
 
   return (
-    <div className="table-responsive">
-      {isLoading?<Spinner/>:
-      <table className="table table-striped table-bordered" id="performance_table">
-        <thead>
-        <tr>
-          <th>Date</th>
-          <th>Holiday</th>
-          <th>Us/Indian Holiday</th>
-          <th>Action(s)</th>
-        </tr>
-        </thead>
-        <tbody>
-        {holidaysMap.data === undefined?
-        <tr><td colSpan={9}><Spinner/></td></tr>:
-        holidaysMap.data.data.map((holiday) => {
-          return <tr key={holiday.id}>
-            <td >{holiday.dated}</td>
-            <td >{holiday.attendence}</td>
-            <td >{holiday.reason}</td>
-            <td></td>
-          </tr>
-        })
-        }
-        </tbody>
-      </table>
-      }
-    </div>
+    <Listing isLoading={isLoading} records={holidaysMap} config={config} />
   )
 }
 
