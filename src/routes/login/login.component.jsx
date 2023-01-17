@@ -12,7 +12,7 @@ const defaultFormFields = {
 }
 
 const Login = () => {
-
+    document.body.classList.add('body-backround');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -94,6 +94,7 @@ const Login = () => {
                                         <div>
                                             <input type="password" name="otp" id="otp" onChange={handleChange} value={otp}/>
                                         </div>
+                                        <br />
                                         <button id="btn_Login" type="submit" onClick={loginMe}>Login</button>
                                     </div>
                                 </div>

@@ -9,7 +9,7 @@ import SearchBar from '../../components/search/search.component';
 import Breadcrumb from '../../components/breadcrumb/breadcrumb.component';
 
 const Navigation = () => {
-
+  document.body.classList.remove('body-backround');
   const items = [
     {
       '/' : [
