@@ -21,7 +21,7 @@ const HolidaysList = () => {
   const config = {'dated': 'Date', 'attendence': 'Holiday','reason': 'Us/Indian Holiday'};
 
   return (
-    <Listing isLoading={isLoading} records={holidaysMap} config={config} />
+    <Listing isLoading={isLoading} records={holidaysMap} config={config} page={'holiday'} />
   )
 }
 

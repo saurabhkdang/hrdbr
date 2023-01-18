@@ -31,8 +31,8 @@ const getAPIResponse = async (route, method = 'GET', postData={}) => {
             headers: new Headers({'content-type': 'application/json'}),//,"Aceess-Control-Allow-Origin":"*"
             body: JSON.stringify(postData)
         };
-        console.log(postData);
-        const getRequestBody = '';
+        //console.log(postData);
+        //const getRequestBody = '';
         let paramString = '';
 
         if(method === 'GET'){
@@ -46,7 +46,7 @@ const getAPIResponse = async (route, method = 'GET', postData={}) => {
         }
 
         let response = await fetch(
-            BASE_PATH+route+'?'+(paramString!=''?paramString+'&':"")+'api_token='+token,
+            BASE_PATH+route+'?'+(paramString!==''?paramString+'&':"")+'api_token='+token,
             (method==="POST"?requestOptions:null)
         );
         let responseJson = await response.json();
@@ -74,6 +74,10 @@ export const getJobDescriptions = async () => {
 
 export const getHolidays = async () => {
     return getAPIResponse('holiday');
+}
+
+export const getHolidayById = async (id) => {
+    return getAPIResponse('holiday/'+id);
 }
 
 export const getAssignRoles = async (role) => {

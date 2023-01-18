@@ -18,3 +18,8 @@ export const selectHolidaysIsLoading = createSelector(
     [selectHolidaysReducer],
     (holidaysSlider) => holidaysSlider.isLoading
 )
+
+export const selectHolidayRecord = createSelector(
+    [selectHolidaysReducer],
+    (holidayRecord) => holidayRecord.record
+)

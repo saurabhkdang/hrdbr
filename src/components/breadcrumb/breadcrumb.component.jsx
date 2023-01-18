@@ -7,6 +7,10 @@ const Breadcrumb = ({items}) => {
     let index = location.pathname;
     if(index.search('assign-roles')>-1){
         index = '/assign-roles';
+    }else if(index.search('holiday')>-1){
+        index = '/holiday';
+    }else if(index.search('job')>-1){
+        index = '/job';
     }
 
     return (
