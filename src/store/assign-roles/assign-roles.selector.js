@@ -14,6 +14,16 @@ export const selectAssignRolesMap = createSelector(
     (assign_roles) => assign_roles
 )
 
+export const selectUpdateSuccess = createSelector(
+    [selectAssignRolesReducer],
+    (assignRolesSlicer) => assignRolesSlicer.success
+)
+
+export const selectUpdateError = createSelector(
+    [selectAssignRolesReducer],
+    (assignRolesSlicer) => assignRolesSlicer.error
+)
+
 export const selectAssignRolesIsLoading = createSelector(
     [selectAssignRolesReducer],
     (assignRolesSlicer) => assignRolesSlicer.isLoading

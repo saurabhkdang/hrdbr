@@ -31,7 +31,7 @@ const getAPIResponse = async (route, method = 'GET', postData={}) => {
             headers: new Headers({'content-type': 'application/json'}),//,"Aceess-Control-Allow-Origin":"*"
             body: JSON.stringify(postData)
         };
-
+        console.log(postData);
         const getRequestBody = '';
         let paramString = '';
 
@@ -82,4 +82,8 @@ export const getAssignRoles = async (role) => {
 
 export const getMonthlyRatings = async () => {
     return getAPIResponse('performance');
+}
+
+export const updateRoles = async (data) => {
+    return getAPIResponse('assign-role-submit','POST', data)
 }

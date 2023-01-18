@@ -1,16 +1,18 @@
-import {React, useEffect} from 'react'
+import {React, useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAssignRolesStart } from '../../store/assign-roles/assign-roles.action';
-import { selectAssignRolesMap, selectAssignRolesIsLoading } from '../../store/assign-roles/assign-roles.selector';
+import { fetchAssignRolesStart, updateRoles, hideAlert } from '../../store/assign-roles/assign-roles.action';
+import { selectAssignRolesMap, selectAssignRolesIsLoading, selectUpdateSuccess, selectUpdateError } from '../../store/assign-roles/assign-roles.selector';
 import {useParams, useNavigate} from 'react-router-dom';
 import Spinner from '../../components/spinner/spinner.component';
 
+const defaultFormFields = {};
 const AssignRoles = () => {
 
   const { role } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [formFields, setFormFields] = useState(defaultFormFields);
 
   useEffect(() => {
 
@@ -25,8 +27,34 @@ const AssignRoles = () => {
   
   const assignRolesMap = useSelector(selectAssignRolesMap);
   const isLoading = useSelector(selectAssignRolesIsLoading);
+  const success = useSelector(selectUpdateSuccess);
+  const error = useSelector(selectUpdateError);
   
   const permissionChangeHandler = (event) => navigate(event.target.value);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields({...formFields, [name]:parseInt(value)});
+  }
+
+  const onSubmitHandler = () => {
+    console.log(formFields);
+    dispatch(updateRoles(formFields));
+  };
+
+  const hideAlertHandler = (type) => {
+    dispatch(hideAlert(type));
+  }
+
+  useEffect(() => {
+    if(assignRolesMap.actions !== undefined) {
+      let customFields = {};
+      assignRolesMap.actions.map((role) => {
+        customFields[`permission_${role.action_id}_${role.role_id}`] = role.permission;
+      })
+      setFormFields({...customFields });
+    }
+  },[role, assignRolesMap]);
 
   return (
     <div className="row">
@@ -35,13 +63,13 @@ const AssignRoles = () => {
       </div>
       <div className="col-md-6">
         <div className="form-group row">
-          <label for="role" className="col-sm-2 col-form-label" style={{"margin-top":"6px"}}>Assign Role For</label>
+          <label htmlFor="role" className="col-sm-2 col-form-label" style={{"marginTop":"6px"}}>Assign Role For</label>
           <div className="col-sm-4">
-            <select className="form-control" id="role" name="role" onChange={permissionChangeHandler}>
+            <select className="form-control" id="role" name="role" value={role?role:""} onChange={permissionChangeHandler}>
             {assignRolesMap.roles === undefined?
               <option>No Roles</option>:
               assignRolesMap.roles.map((role) => {
-                return <option value={ role.id }>{role.role_title}</option>
+                return <option key={role.id} value={ role.id }>{role.role_title}</option>
               })
             }
             </select>
@@ -50,43 +78,53 @@ const AssignRoles = () => {
       </div>
       <div className="col-md-6">
         <div className="pull-right">
-          <button className="btn btn-primary btn-sm" id="updateall">Update All</button>
+          <button className="btn btn-primary btn-sm" id="updateall" onClick={onSubmitHandler}>Update All</button>
         </div>
       </div>
       <div className="clearfix"></div>
       <div className='col-md-12'>
+        <div className="alert alert-success alert-block" style={{ 'display':(success?'block':'none') }}>
+            <button type="button" onClick={() => hideAlertHandler('success')} className="close">×</button>	
+            <strong>{success?success:""}</strong>
+        </div>
+        <div className="alert alert-danger alert-block" style={{ 'display':(error?'block':'none') }}>
+            <button type="button" onClick={() => hideAlertHandler('error')} className="close">×</button>	
+            <strong>{error?error:""}</strong>
+        </div>
         <div className="table-responsive">
           {isLoading?<Spinner/>:
-          <table className="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>Actions</th>
-                <th colSpan={3} style={{"textAlign":"center"}}>Permissions</th>
-              </tr>
-            </thead>
-            <tbody>
-            {assignRolesMap.actions === undefined?
-                <tr><td colSpan={9}><Spinner/></td></tr>:
-                assignRolesMap.actions.map((holiday, index) => {
-                return <tr key={holiday.id}>
-                  <td>{holiday.name}</td>
-                  <td>
-                    <input className="form-check-input" type="radio" name={`permission_${holiday.action_id}_${holiday.role_id}`} id={`permission_${holiday.action_id}_${holiday.role_id}_0`} value="0" checked={ holiday.permission === 0?true:false } onChange={ () => permissionChangeHandler(0) } />
-                    <label className="form-check-label" htmlFor={`permission_${holiday.action_id}_${holiday.role_id}_0`}>Inherit </label>
-                    </td>
-                  <td>
-                    <input className="form-check-input" type="radio" name={`permission_${holiday.action_id}_${holiday.role_id}`} id={`permission_${holiday.action_id}_${holiday.role_id}_1`} value="1" checked={ holiday.permission === 1?true:false } onChange={ () => permissionChangeHandler(1) }/>
-                    <label className="form-check-label" htmlFor={`permission_${holiday.action_id}_${holiday.role_id}_1`}>Allow</label>
-                    </td>
-                  <td>
-                    <input className="form-check-input" type="radio" name={`permission_${holiday.action_id}_${holiday.role_id}`} id={`permission_${holiday.action_id}_${holiday.role_id}_2`} value="2" checked={ holiday.permission === 2?true:false } onChange={ () => permissionChangeHandler(2) }/>
-                    <label className="form-check-label" htmlFor={`permission_${holiday.action_id}_${holiday.role_id}_2`}>Deny</label>
-                    </td>
+          <form action="">
+            <table className="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Actions</th>
+                  <th colSpan={3} style={{"textAlign":"center"}}>Permissions</th>
                 </tr>
-                })
-              }
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+              {assignRolesMap.actions === undefined?
+                  <tr><td colSpan={9}><Spinner/></td></tr>:
+                  assignRolesMap.actions.map((role, index) => {
+                  return <tr key={role.id}>
+                    <td>{role.name}</td>
+                    <td>
+                      <input className="form-check-input" type="radio" name={`permission_${role.action_id}_${role.role_id}`} id={`permission_${role.action_id}_${role.role_id}_0`} value="0" checked={formFields[`permission_${role.action_id}_${role.role_id}`] === 0?true:false} onChange={ handleChange } />
+                      <label className="form-check-label" htmlFor={`permission_${role.action_id}_${role.role_id}_0`}>Inherit </label>
+                      </td>
+                    <td>
+                      <input className="form-check-input" type="radio" name={`permission_${role.action_id}_${role.role_id}`} id={`permission_${role.action_id}_${role.role_id}_1`} value="1" checked={formFields[`permission_${role.action_id}_${role.role_id}`] === 1?true:false} onChange={ handleChange }/>
+                      <label className="form-check-label" htmlFor={`permission_${role.action_id}_${role.role_id}_1`}>Allow</label>
+                      </td>
+                    <td>
+                      <input className="form-check-input" type="radio" name={`permission_${role.action_id}_${role.role_id}`} id={`permission_${role.action_id}_${role.role_id}_2`} value="2" checked={formFields[`permission_${role.action_id}_${role.role_id}`] === 2?true:false} onChange={ handleChange }/>
+                      <label className="form-check-label" htmlFor={`permission_${role.action_id}_${role.role_id}_2`}>Deny</label>
+                      </td>
+                  </tr>
+                  })
+                }
+              </tbody>
+            </table>
+          </form>
           }
         </div>
       </div>
