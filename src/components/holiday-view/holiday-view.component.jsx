@@ -24,7 +24,7 @@ const HolidayView = () => {
                 <table className="table">
                     <tbody>
                     {
-                        holidayRecord.data !== undefined?
+                        holidayRecord != null && holidayRecord.data !== undefined?
                         <>
                         <tr>
                             <th width="25%">Date</th>
