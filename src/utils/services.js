@@ -72,6 +72,10 @@ export const getJobDescriptions = async () => {
     return getAPIResponse('job');
 }
 
+export const getJobById = async (id) => {
+    return getAPIResponse('job/'+id);
+}
+
 export const getHolidays = async () => {
     return getAPIResponse('holiday');
 }

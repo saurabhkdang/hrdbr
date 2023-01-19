@@ -18,3 +18,8 @@ export const selectJDIsLoading = createSelector(
     [selectJDReducer],
     (jdSlicer) => jdSlicer.isLoading
 )
+
+export const selectJDRecord = createSelector(
+    [selectJDReducer],
+    (jdSlicer) => jdSlicer.record
+)
