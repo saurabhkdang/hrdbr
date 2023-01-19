@@ -6,8 +6,6 @@ import HolidaysList from './routes/holiday/holiday.component';
 import AssignRoles from './routes/assign-roles/assign-roles.component';
 import MonthlyRatings from './routes/monthly-ratings/monthly-ratings.component';
 import Login from './routes/login/login.component';
-import HolidayView from './components/holiday-view/holiday-view.component';
-import JobView from './components/job-view/job-view.component';
 import './App.css';
 
 function App() {
@@ -17,10 +15,8 @@ function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/' element={<Navigation/>}>
         <Route index element={<Employees/>} />
-        <Route path='job' element={<JobDescription/>} />
-        <Route path='job/:id' element={<JobView/>} />
-        <Route extact path='holiday' element={<HolidaysList/>} />
-        <Route path='holiday/:id' element={<HolidayView/>}/>
+        <Route path='job/*' element={<JobDescription/>} />
+        <Route path='holiday/*' element={<HolidaysList/>} />
         <Route path='assign-roles' element={<AssignRoles/>}>
           <Route path=":role" element={<AssignRoles/>}></Route>
         </Route>

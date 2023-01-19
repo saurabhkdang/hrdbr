@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchHolidaysStart } from '../../store/holiday/holiday.action';
 import { selectHolidaysMap, selectHolidaysIsLoading } from '../../store/holiday/holiday.selector';
 import Listing from '../../components/listing/listing.component';
+import { Routes, Route } from 'react-router-dom';
+import HolidayView from '../../components/holiday-view/holiday-view.component';
 
 const HolidaysList = () => {
 
@@ -21,7 +23,10 @@ const HolidaysList = () => {
   const config = {'dated': 'Date', 'attendence': 'Holiday','reason': 'Us/Indian Holiday'};
 
   return (
-    <Listing isLoading={isLoading} records={holidaysMap} config={config} page={'holiday'} />
+    <Routes>
+      <Route index element={<Listing isLoading={isLoading} records={holidaysMap} config={config} page={'holiday'} />} />
+      <Route path=':id' element={<HolidayView/>}  />
+    </Routes>
   )
 }
 
