@@ -6,6 +6,7 @@ import { holidaysReducer } from "./holiday/holiday.reducer";
 import { assignRolesReducer } from "./assign-roles/assign-roles.reducer";
 import { monthlyRatingsReducer } from './monthly-ratings/monthly-ratings.reducer';
 import { loginReducer } from "./login/login.reducer";
+import { breadCrumbReducer } from "./breadcrumb/breadcrumb.reducer";
 
 export const rootReducer = combineReducers({
     employees: employeesReduer,
@@ -13,5 +14,6 @@ export const rootReducer = combineReducers({
     holidays: holidaysReducer,
     assign_roles: assignRolesReducer,
     monthly_ratings: monthlyRatingsReducer,
-    login: loginReducer
+    login: loginReducer,
+    breadcrumb: breadCrumbReducer
 })

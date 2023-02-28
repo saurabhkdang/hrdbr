@@ -13,8 +13,8 @@ const LeftNav = () => {
         <div className="sidebar-scroll">
             <nav id="left-sidebar-nav" className="sidebar-nav">
                 <MetisMenu>
-                    <li><Link to="/" exact><i className="lnr lnr-home"></i>Dashboard</Link></li>
-                    <li><Link to="/" exact><i className="lnr lnr-users"></i>Employee Details</Link></li>
+                    <li><Link to="/" exact="true"><i className="lnr lnr-home"></i>Dashboard</Link></li>
+                    <li><Link to="/" exact="true"><i className="lnr lnr-users"></i>Employee Details</Link></li>
                     <li><Link to="#" className="has-arrow"><i className="fa fa-building-o"></i>Company</Link>
                         <ul>
                             <li><Link to="/performance"><i className="lnr lnr-star"></i> <span>Monthly Rating</span></Link></li>
@@ -25,7 +25,7 @@ const LeftNav = () => {
                             <li><Link to="/holiday"><i className="fa fa-file-word-o"></i> <span>Holidays</span></Link></li>
                         </ul>
                     </li>
-                    <li><Link to="/assign-roles" exact><i className="lnr lnr-users"></i>Assign Roles</Link></li>
+                    <li><Link to="/assign-roles" exact="true"><i className="lnr lnr-users"></i>Assign Roles</Link></li>
                     <li><a href="mailto:support@interlynxsystems.com"><i className="lnr lnr-question-circle"></i> <span>Support</span></a></li>
                 </MetisMenu>
             </nav>

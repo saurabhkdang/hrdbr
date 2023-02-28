@@ -3,6 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchMonthlyRatingsStart } from '../../store/monthly-ratings/monthly-ratings.action';
 import { selectMonthlyRatingsMap, selectMonthlyRatingsIsLoading } from '../../store/monthly-ratings/monthly-ratings.selector';
 import Spinner from '../../components/spinner/spinner.component';
+import { setBreadcrumb } from '../../store/breadcrumb/breadcrumb.action';
+
+const breadCrumbItems = [
+    {to:'/', label: 'Home'},
+    {label: 'Monthly Ratings'},
+];
 
 const MonthlyRatings = () => {
 
@@ -11,6 +17,7 @@ const MonthlyRatings = () => {
     useEffect(()=>{
         const getMonthlyRatingsMap = async () => {
             dispatch(fetchMonthlyRatingsStart());
+            dispatch(setBreadcrumb(breadCrumbItems));
         }
 
         getMonthlyRatingsMap();

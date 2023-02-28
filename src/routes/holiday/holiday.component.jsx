@@ -5,14 +5,21 @@ import { selectHolidaysMap, selectHolidaysIsLoading } from '../../store/holiday/
 import Listing from '../../components/listing/listing.component';
 import { Routes, Route } from 'react-router-dom';
 import HolidayView from '../../components/holiday-view/holiday-view.component';
+import { setBreadcrumb } from '../../store/breadcrumb/breadcrumb.action';
 
 const HolidaysList = () => {
+
+  const breadCrumbItems = [
+    {'to':'/', label: 'Home'},
+    {label: 'Holidays List'},
+  ];
 
   const dispatch = useDispatch();
 
   useEffect(()=>{
     const getHolidaysMap = async () => {
       dispatch(fetchHolidaysStart());
+      dispatch(setBreadcrumb(breadCrumbItems));
     }
 
     getHolidaysMap();

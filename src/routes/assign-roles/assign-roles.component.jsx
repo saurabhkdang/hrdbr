@@ -4,8 +4,14 @@ import { fetchAssignRolesStart, updateRoles, hideAlert } from '../../store/assig
 import { selectAssignRolesMap, selectAssignRolesIsLoading, selectUpdateSuccess, selectUpdateError } from '../../store/assign-roles/assign-roles.selector';
 import {useParams, useNavigate} from 'react-router-dom';
 import Spinner from '../../components/spinner/spinner.component';
+import { setBreadcrumb } from '../../store/breadcrumb/breadcrumb.action';
 
 const defaultFormFields = {};
+const breadCrumbItems = [
+  {to:'/', label: 'Home'},
+  {label: 'Assign Roles'},
+];
+
 const AssignRoles = () => {
 
   const { role } = useParams();
@@ -18,6 +24,7 @@ const AssignRoles = () => {
 
     const getAssignRolesMap = async () => {
       dispatch(fetchAssignRolesStart(role?role:1));
+      dispatch(setBreadcrumb(breadCrumbItems));
     }
 
     getAssignRolesMap();
