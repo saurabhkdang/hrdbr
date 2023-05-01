@@ -19,7 +19,6 @@ const SearchBar = () => {
     }
 
     const submitHandler = (event) => {
-        console.log('m here');
         event.preventDefault();
 
         dispatch(fetchEmployeesStart(formFields));   
