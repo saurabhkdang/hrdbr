@@ -1,8 +1,8 @@
 import {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchJDRecordStart } from '../../store/jobdescriptions/jobdescription.action';
-import { selectJDRecord, selectJDIsLoading } from '../../store/jobdescriptions/jobdescription.selector';
+import { fetchJDRecordStart, hideAlert } from '../../store/jobdescriptions/jobdescription.action';
+import { selectJDRecord, selectJDIsLoading, selectUpdateSuccess, selectUpdateError } from '../../store/jobdescriptions/jobdescription.selector';
 import Spinner from '../spinner/spinner.component';
 import { setBreadcrumb } from '../../store/breadcrumb/breadcrumb.action';
 
@@ -14,6 +14,8 @@ const breadCrumbItems = [
 const JobView = () => {
 
     const dispatch = useDispatch();
+    const success = useSelector(selectUpdateSuccess);
+    const error = useSelector(selectUpdateError);
     const {id} = useParams();
 
     useEffect(()=>{
@@ -22,17 +24,30 @@ const JobView = () => {
     
     const jdRecord = useSelector(selectJDRecord);
     const isLoading = useSelector(selectJDIsLoading);
+
+    const hideAlertHandler = (type) => {
+        dispatch(hideAlert(type));
+    }
     
     useEffect(() => {
         let newObj = {'label' : jdRecord != null && jdRecord.data !== undefined?jdRecord.data.job_title:null};
         //breadCrumbItems.push(newObj);
         dispatch(setBreadcrumb([...breadCrumbItems, newObj]));
+        
     },[jdRecord]);
 
     return (
     <div className="row">
         {isLoading ? <Spinner/>:
         <div className="col-md-12">
+            <div className="alert alert-success alert-block" style={{ 'display':(success?'block':'none') }}>
+                <button type="button" onClick={() => hideAlertHandler('success')} className="close">×</button>	
+                <strong>{success?success:""}</strong>
+            </div>
+            <div className="alert alert-danger alert-block" style={{ 'display':(error?'block':'none') }}>
+                <button type="button" onClick={() => hideAlertHandler('error')} className="close">×</button>	
+                <strong>{error?error:""}</strong>
+            </div>
             <table className="table">
                 <tbody>
                 {
@@ -75,8 +90,8 @@ const JobView = () => {
                 </thead>
                 <tbody>
                     {
-                    jdRecord != null && jdRecord.jd_data !== undefined?
-                    jdRecord.jd_data.map((jd) => {
+                    jdRecord != null && typeof jdRecord.data !== "undefined"?
+                    jdRecord.data.details.map((jd) => {
                         return <tr key={jd.id}>
                             <td width="55%">{ jd.description }</td>
                             <td width="15%">{ jd.type } </td>

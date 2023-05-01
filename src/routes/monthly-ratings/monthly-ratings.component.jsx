@@ -25,7 +25,7 @@ const MonthlyRatings = () => {
 
     const monthlyRatingsMap = useSelector(selectMonthlyRatingsMap);
     const isLoading = useSelector(selectMonthlyRatingsIsLoading);
-
+    console.log(monthlyRatingsMap);
     return (
         <div className="row">
             <div className="col-md-12">     
@@ -33,6 +33,10 @@ const MonthlyRatings = () => {
             </div>
             <div className="col-md-12">
                 {isLoading?<Spinner/>:
+                <>
+                <table className="table table-striped table-bordered" id="performance_table">
+            
+                </table>
                 <table className="table table-striped table-bordered" id="performance_table">
                     <thead>
                         <tr>
@@ -48,19 +52,15 @@ const MonthlyRatings = () => {
                     <tbody>
                         {
                             monthlyRatingsMap.data !== undefined ?
-                            monthlyRatingsMap.data.data.map((user) => {
+                            monthlyRatingsMap.data.map((user, key) => {
                                 let datestring = new Date(user.doj);
                                 let monthNumber = new Date(datestring).getMonth()+1;
                                 return <tr key={user.id}>
                                     <td>{user.name}</td>
                                     {
-
-
                                         monthlyRatingsMap.month_headers.map((header, index) => {
-                                            return <td key={user.id + "_" + header.month + "_" + header.year} id={user.id + "_" + header.month + "_" + header.year}>
-                                                {
-                                                monthlyRatingsMap.performance[user.id] !== undefined && monthlyRatingsMap.performance[user.id][header.month+"_"+header.year]?<span className={`fillparent reviewbutton style_${monthlyRatingsMap.performance[user.id][header.month+"_"+header.year].performance}`} data-toggle="tooltip" data-placement="top" title={monthlyRatingsMap.performance[user.id][header.month+"_"+header.year].comment} data-userid={user.id} data-month={`${header.year}_${header.month}_01`}></span>:null
-                                                }
+                                            return <td key={key}>
+                                                {monthlyRatingsMap.data[key]['dates'][header.label]!==undefined?<span className={`fillparent reviewbutton style_${monthlyRatingsMap.data[key]['dates'][header.label].rating}`} data-toggle="tooltip" data-platment="top" title={`${monthlyRatingsMap.data[key]['dates'][header.label].comment}`} data-userid={user.id} data-month={`${header.year}_${header.month}_01`}></span>:""}
                                                 {monthNumber == header.month?<span className="label label-default pull-right">Increment</span>:null}
                                             </td>
                                         })
@@ -70,6 +70,7 @@ const MonthlyRatings = () => {
                         }
                     </tbody>
                 </table>
+                </>
                 }
             </div>
         </div>

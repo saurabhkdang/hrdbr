@@ -71,7 +71,7 @@ const Navigation = () => {
           <div className="navbar-btn">
             {/* <button type="button" className="btn-toggle-offcanvas"><i className="lnr lnr-menu"></i></button> */}
           </div>
-          <div className="navbar-brand">
+          <div className="navbar-brand" style={{'width':'295px'}}>
             <Link to="/">
 						  <img alt='' style={{"position": "relative","top":"-8px","maxWidth":"60%"}} src={logo} className="img-responsive logo" />
 					  </Link>   
@@ -83,7 +83,7 @@ const Navigation = () => {
             <div id='navbar-menu'>
               <ul className='nav navbar-nav'>
                 <li className="dropdown">
-                  <a href="#" className="dropdown-toggle icon-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="lnr lnr-user"></i>&nbsp;Welcome, {user?user.name:""}<span className="caret"></span></a>
+                  <a href='#' className="dropdown-toggle icon-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i className="lnr lnr-user"></i>&nbsp;Welcome, {user?user.name:""}<span className="caret"></span></a>
                   <ul className="dropdown-menu user-menu menu-icon">
                     <li className="menu-heading">Welcome, {user?user.name:""}</li>
                     <li>

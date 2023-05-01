@@ -24,19 +24,19 @@ const HolidayView = () => {
                 <table className="table">
                     <tbody>
                     {
-                        holidayRecord != null && holidayRecord.data !== undefined?
+                        holidayRecord != null && holidayRecord !== undefined?
                         <>
                         <tr>
                             <th width="25%">Date</th>
-                            <td>{holidayRecord.data.dated}</td>
+                            <td>{holidayRecord.dated}</td>
                         </tr>
                         <tr>
                             <th>Holiday</th>
-                            <td>{holidayRecord.data.attendence}</td>
+                            <td>{holidayRecord.attendence}</td>
                         </tr>
                         <tr>
                             <th>US / Indian holiday</th>
-                            <td>{holidayRecord.data.reason}</td>
+                            <td>{holidayRecord.reason}</td>
                         </tr>
                         </>
                         :

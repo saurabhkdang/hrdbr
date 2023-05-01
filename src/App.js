@@ -6,7 +6,8 @@ import HolidaysList from './routes/holiday/holiday.component';
 import AssignRoles from './routes/assign-roles/assign-roles.component';
 import MonthlyRatings from './routes/monthly-ratings/monthly-ratings.component';
 import Login from './routes/login/login.component';
-import JobView from './components/job-view/job-view.component';
+import JobView from './components/job/job-view.component';
+import JobDescriptionEdit from './components/job/job.component';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route index element={<Employees/>} />
         <Route path='job' element={<JobDescription/>} />
         <Route path='job/:id' element={<JobView/>} />
+        <Route path='job/addedit/:id' element={<JobDescriptionEdit/>} />
         <Route path='holiday/*' element={<HolidaysList/>} />
         <Route path='assign-roles' element={<AssignRoles/>}>
           <Route path=":role" element={<AssignRoles/>}></Route>

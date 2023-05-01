@@ -23,3 +23,23 @@ export const selectJDRecord = createSelector(
     [selectJDReducer],
     (jdSlicer) => jdSlicer.record
 )
+
+export const selectUpdateSuccess = createSelector(
+    [selectJDReducer],
+    (jdSlicer) => jdSlicer.success
+)
+
+export const selectUpdateRecordId = createSelector(
+    [selectJDReducer],
+    (jdSlicer) => jdSlicer.record_id
+)
+
+export const selectUpdateError = createSelector(
+    [selectJDReducer],
+    (jdSlicer) => jdSlicer.error
+)
+
+export const selectAssignRolesIsLoading = createSelector(
+    [selectJDReducer],
+    (jdSlicer) => jdSlicer.isLoading
+)

@@ -1,6 +1,8 @@
+// eslint-disable-next-line
 import axios from "axios";
 const token = localStorage.getItem('userToken');
-const BASE_PATH = process.env.REACT_APP_SERVER_URL;
+const BASE_PATH = process.env.NODE_ENV === 'development'?process.env.REACT_APP_SERVER_URL:process.env.REACT_APP_LIVE_SERVER_URL;
+
 
 const getAPIResponse = async (route, method = 'GET', postData={}) => {
     try {
@@ -85,7 +87,7 @@ export const getHolidayById = async (id) => {
 }
 
 export const getAssignRoles = async (role) => {
-    return getAPIResponse('assign-roles/'+role);
+    return getAPIResponse('assign-roles/assigned_roles/'+role);
 }
 
 export const getMonthlyRatings = async () => {
@@ -94,4 +96,12 @@ export const getMonthlyRatings = async () => {
 
 export const updateRoles = async (data) => {
     return getAPIResponse('assign-role-submit','POST', data)
+}
+
+export const updateJDRecord = async ({formFields, id}) => {
+    return getAPIResponse('job/addedit', 'POST', formFields);
+}
+
+export const deleteRecord = async (route) => {
+    return getAPIResponse(route);
 }

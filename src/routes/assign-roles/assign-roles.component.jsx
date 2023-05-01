@@ -36,6 +36,7 @@ const AssignRoles = () => {
   const isLoading = useSelector(selectAssignRolesIsLoading);
   const success = useSelector(selectUpdateSuccess);
   const error = useSelector(selectUpdateError);
+  console.log(success);
   
   const permissionChangeHandler = (event) => navigate(event.target.value);
 
@@ -70,7 +71,7 @@ const AssignRoles = () => {
       </div>
       <div className="col-md-6">
         <div className="form-group row">
-          <label htmlFor="role" className="col-sm-2 col-form-label" style={{"marginTop":"6px"}}>Assign Role For</label>
+          <label htmlFor="role" className="col-sm-4 col-form-label" style={{"marginTop":"6px"}}>Assign Role For</label>
           <div className="col-sm-4">
             <select className="form-control" id="role" name="role" value={role?role:""} onChange={permissionChangeHandler}>
             {assignRolesMap.roles === undefined?

@@ -25,12 +25,17 @@ const Employees = () => {
 
   const employeesMap = useSelector(selectEmployeesMap);
   const isLoading = useSelector(selectEmployeesIsLoading);
+  
+  let config = {};
+  if(employeesMap && typeof employeesMap.fields==="undefined"){
+    config = {'name': 'Name', 'member': 'Division','doj': 'DOJ', 'employee_type': 'Type'
+    //, 'department': 'Department', 'manager': 'Manager', 'title': 'Title', 'grade': 'Grade',  
+    };
+  }else{
+    config = employeesMap.fields;
+  }
 
-  const config = {'name': 'Name', 'member': 'Division','doj': 'DOJ', 'employee_type': 'Type'
-  //, 'department': 'Department', 'manager': 'Manager', 'title': 'Title', 'grade': 'Grade',  
-  };
-
-  return <Listing isLoading={isLoading} records={employeesMap} config={config} />
+  return <Listing isLoading={isLoading} records={employeesMap} config={config}  />
 }
 
 export default Employees;

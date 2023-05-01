@@ -19,13 +19,14 @@ const SearchBar = () => {
     }
 
     const submitHandler = (event) => {
+        console.log('m here');
         event.preventDefault();
 
         dispatch(fetchEmployeesStart(formFields));   
     }
 
     return (
-        <form id="navbar-search" className="navbar-form search-form" method="GET">
+        <form id="navbar-search" className="navbar-form search-form" method="GET" onSubmit={e => { submitHandler(e); }}>
             <select name="search_type" id="search_type" value={search_type} className="form-control" onChange={handleChange}>
                 <option value="">Search Type</option>
                 <option value="name">Name</option>
