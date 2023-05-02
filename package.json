@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf f:/xampp/htdocs/latest_hrdb/react && mv build f:/xampp/htdocs/latest_hrdb/react",
+    "build": "react-scripts build && rm -rf f:/xampp/htdocs/latest_hrdb/react && mv build f:/xampp/htdocs/latest_hrdb/react && cd f:/xampp/htdocs/latest_hrdb && git add . && git commit -m \"Updated build code\" && git push origin master",
     "build:development": "env-cmd -f .env.development react-scripts build && rm -rf f:/xampp/htdocs/latest_hrdb/react && mv build f:/xampp/htdocs/latest_hrdb/react",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
