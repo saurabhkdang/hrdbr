@@ -13,9 +13,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <HashRouter>
+        <BrowserRouter basename={process.env.REACT_APP_FOLDER_PATH}>
           <App />
-        </HashRouter>
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>
