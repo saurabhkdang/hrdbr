@@ -70,6 +70,11 @@ export const getEmployees = async (searchObj) => {
     return getAPIResponse('listuser', 'GET', searchObj);
 }
 
+export const getEmployeeById = async (id) => {
+    console.log(id);
+    return getAPIResponse('user/'+id);
+}
+
 export const getJobDescriptions = async () => {
     return getAPIResponse('job');
 }

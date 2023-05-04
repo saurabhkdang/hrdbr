@@ -35,7 +35,7 @@ const Employees = () => {
     config = employeesMap.fields;
   }
 
-  return <Listing isLoading={isLoading} records={employeesMap} config={config}  />
+  return <Listing isLoading={isLoading} records={employeesMap} config={config} page={"employee"} />
 }
 
 export default Employees;

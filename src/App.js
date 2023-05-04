@@ -8,6 +8,7 @@ import MonthlyRatings from './routes/monthly-ratings/monthly-ratings.component';
 import Login from './routes/login/login.component';
 import JobView from './components/job/job-view.component';
 import JobDescriptionEdit from './components/job/job.component';
+import EmployeeView from './routes/employees/employee.view.component';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/' element={<Navigation/>}>
         <Route index element={<Employees/>} />
+        <Route path='employee/:id' element={<EmployeeView/>} />
         <Route path='job' element={<JobDescription/>} />
         <Route path='job/:id' element={<JobView/>} />
         <Route path='job/addedit/:id' element={<JobDescriptionEdit/>} />
